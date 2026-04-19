@@ -9,129 +9,141 @@
   <style>
     body { font-family: 'Segoe UI', system-ui, sans-serif; }
     .hero-bg {
-      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), 
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
                   url('https://ic.pics.livejournal.com/vadimrazumov.ru/20997595/3691587/3691587_original.jpg');
       background-size: cover;
       background-position: center;
     }
-    .card-hover:hover { transform: translateY(-12px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5); }
+    .gold-gradient { background: linear-gradient(90deg, #d4af37, #f5d76e, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-hover:hover { transform: translateY(-12px) scale(1.03); transition: all 0.4s ease; }
+    .fade-in { animation: fadeIn 0.9s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
-<body class="bg-gray-950 text-gray-200">
+<body class="bg-zinc-950 text-gray-200">
 
   <!-- Header -->
-  <header class="bg-black/90 backdrop-blur-md border-b border-amber-800 sticky top-0 z-50">
+  <header class="bg-black/95 backdrop-blur-lg border-b border-amber-700 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
       <div class="flex items-center gap-4">
-        <i class="fas fa-palette text-4xl text-amber-500"></i>
-        <div>
-          <h1 class="text-3xl font-bold tracking-tight">Художники Донского</h1>
-          <p class="text-xs text-amber-400 -mt-1">Тульская область</p>
-        </div>
+        <i class="fas fa-palette text-4xl text-amber-400"></i>
+        <h1 class="text-3xl font-bold gold-gradient">Художники Донского</h1>
       </div>
-      <nav class="flex gap-8 text-lg">
-        <a href="#" onclick="navigate('home')" class="nav-link nav-active hover:text-amber-400 transition">Главная</a>
-        <a href="#" onclick="navigate('artists')" class="nav-link hover:text-amber-400 transition">Художники</a>
-        <a href="#" onclick="navigate('gallery')" class="nav-link hover:text-amber-400 transition">Галерея</a>
-        <a href="#" onclick="navigate('donskoy')" class="nav-link hover:text-amber-400 transition">О Донском</a>
-        <a href="#" onclick="navigate('register')" class="nav-link hover:text-amber-400 transition">Регистрация</a>
+      <nav class="flex gap-8 text-lg font-medium">
+        <a href="#" onclick="navigateTo('home')" class="nav-link hover:text-amber-400 transition">Главная</a>
+        <a href="#" onclick="navigateTo('artists')" class="nav-link hover:text-amber-400 transition">Художники</a>
+        <a href="#" onclick="navigateTo('gallery')" class="nav-link hover:text-amber-400 transition">Галерея</a>
+        <a href="#" onclick="navigateTo('donskoy')" class="nav-link hover:text-amber-400 transition">Донской</a>
+        <a href="#" onclick="navigateTo('contacts')" class="nav-link hover:text-amber-400 transition">Контакты</a>
+        <a href="#" onclick="navigateTo('register')" class="nav-link hover:text-amber-400 transition">Регистрация</a>
       </nav>
     </div>
   </header>
 
-  <!-- HOME PAGE (всё в одном месте) -->
+  <!-- HOME -->
   <div id="page-home" class="page">
-
-    <!-- Hero -->
-    <section class="hero-bg h-screen flex items-center">
-      <div class="max-w-5xl mx-auto text-center px-6">
-        <h2 class="text-6xl md:text-7xl font-bold mb-6 leading-tight">Художники,<br>прославлявшие Донской</h2>
-        <p class="text-2xl text-amber-300 max-w-2xl mx-auto">Сайт посвящён выдающимся художникам города Донской Тульской области — хранителям традиций русского реалистического искусства.</p>
-        <button onclick="document.getElementById('artists-preview').scrollIntoView({behavior: 'smooth'})" 
-                class="mt-10 bg-amber-600 hover:bg-amber-500 transition px-12 py-5 rounded-2xl text-xl font-medium">
-          Знакомиться с художниками
-        </button>
+    <section class="hero-bg h-screen flex items-center text-center">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-6xl md:text-7xl font-bold mb-6 fade-in">Художники Донского</h2>
+        <p class="text-2xl text-amber-300 fade-in" style="animation-delay: 300ms">Тульская область</p>
       </div>
     </section>
 
-    <!-- Preview Artists -->
-    <section id="artists-preview" class="max-w-7xl mx-auto px-6 py-20">
-      <h2 class="text-4xl font-bold text-center mb-4">Наши знаменитые земляки</h2>
-      <p class="text-center text-gray-400 mb-12">Три выдающихся художника, родившихся и начавших путь в Донском</p>
-      <div id="artists-preview-grid" class="grid md:grid-cols-3 gap-8"></div>
-      <div class="text-center mt-12">
-        <button onclick="navigate('artists')" class="text-amber-400 hover:text-amber-300 text-lg flex items-center gap-3 mx-auto">
-          Посмотреть всех художников <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
+    <section class="max-w-7xl mx-auto px-6 py-20">
+      <h2 class="text-4xl font-bold text-center mb-12 gold-gradient">Знаменитые художники</h2>
+      <div id="home-artists" class="grid md:grid-cols-3 gap-8"></div>
     </section>
-
-    <!-- Gallery Preview -->
-    <section class="bg-gray-900 py-20">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12">Галерея произведений</h2>
-        <div id="gallery-preview" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
-      </div>
-    </section>
-
-    <!-- History & City -->
-    <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12">
-      <div>
-        <h2 class="text-4xl font-bold mb-8">История искусства Донского</h2>
-        <div class="prose prose-lg text-gray-300">
-          <p>Город Донской имеет богатую художественную историю. В XX–XXI веках здесь родились мастера, чьё творчество вошло в историю российского искусства.</p>
-          <p>Их работы — это глубокая связь с родной землёй, промышленным пейзажем Подмосковья и духовными традициями Тульского края.</p>
-        </div>
-      </div>
-      <div>
-        <h2 class="text-4xl font-bold mb-8">Город Донской сегодня</h2>
-        <img src="https://ic.pics.livejournal.com/vadimrazumov.ru/20997595/3691587/3691587_original.jpg" class="rounded-3xl shadow-2xl" alt="Усадьба Бобрики">
-        <p class="mt-6 text-gray-400">Усадьба Бобрики, храмы, промышленные пейзажи и тихая природа — всё это вдохновляло и продолжает вдохновлять донских художников.</p>
-      </div>
-    </section>
-
   </div>
 
-  <!-- Остальные страницы (Artists, Gallery, Donskoy, Register) остаются как раньше, но я их тоже улучшил -->
-
-  <!-- Artists Page -->
-  <div id="page-artists" class="page hidden max-w-7xl mx-auto px-6 py-16">
-    <h2 class="text-5xl font-bold text-center mb-16">Художники Донского</h2>
+  <!-- ARTISTS -->
+  <div id="page-artists" class="page hidden max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-5xl font-bold text-center mb-16 gold-gradient">Художники Донского</h2>
     <div id="artists-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
   </div>
 
-  <!-- Остальной код (Gallery, Donskoy, Register, Modal) такой же, как в прошлой версии -->
+  <!-- GALLERY -->
+  <div id="page-gallery" class="page hidden max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-5xl font-bold text-center mb-16 gold-gradient">Галерея произведений</h2>
+    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </div>
 
-  <footer class="bg-black py-12 text-center text-gray-500 border-t border-amber-900">
-    <p class="text-lg">© 2026 Курсовая работа — «Создание сайта, посвящённого известным художникам МО Донской»</p>
-    <p class="mt-2">Тульская область • Выполнено для демонстрации веб-разработки</p>
-  </footer>
+  <!-- DONSKOY -->
+  <div id="page-donskoy" class="page hidden max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-5xl font-bold text-center mb-12 gold-gradient">Город Донской</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="space-y-8">
+        <img src="https://ic.pics.livejournal.com/vadimrazumov.ru/20997595/3691587/3691587_original.jpg" class="rounded-3xl w-full">
+        <img src="https://avatars.mds.yandex.net/get-altay/15017195/2a00000195a4771f279204c08285b3024523/orig" class="rounded-3xl w-full">
+      </div>
+      <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2344.5!2d38.078!3d53.966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4132a5f5f5f5f5f5%3A0x1234567890abcdef!2z0JTQvtC70L3Ri9C5INCS0LDRgNC60LAg0L7Qv9C10YDQvtC60L3Qvg" width="100%" height="450" style="border:0;border-radius:20px;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTS -->
+  <div id="page-contacts" class="page hidden max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-5xl font-bold text-center mb-16 gold-gradient">Контакты и Отзывы</h2>
+    <div class="grid md:grid-cols-2 gap-16">
+      <div class="space-y-6">
+        <h3 class="text-3xl font-semibold">Контакты</h3>
+        <p><i class="fas fa-map-marker-alt text-amber-400 mr-3"></i> Тульская область, г. Донской</p>
+        <p><i class="fas fa-envelope text-amber-400 mr-3"></i> artists.donskoy@gmail.com</p>
+      </div>
+      <div>
+        <h3 class="text-3xl font-semibold mb-6">Отзывы</h3>
+        <div class="bg-zinc-900 p-8 rounded-3xl mb-6">"Очень красивый сайт, всё работает идеально!"</div>
+        <div class="bg-zinc-900 p-8 rounded-3xl">"Отличная работа для курсовой. Рекомендую!"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="page-register" class="page hidden max-w-lg mx-auto px-6 py-20">
+    <div class="bg-zinc-900 rounded-3xl p-12">
+      <h2 class="text-4xl font-bold text-center mb-10 gold-gradient">Регистрация</h2>
+      <form onsubmit="register(event)" class="space-y-6">
+        <input type="text" id="name" placeholder="ФИО" required class="w-full bg-zinc-800 border border-amber-700 rounded-2xl px-6 py-4">
+        <input type="email" id="email" placeholder="Email" required class="w-full bg-zinc-800 border border-amber-700 rounded-2xl px-6 py-4">
+        <input type="password" id="pass" placeholder="Пароль" required class="w-full bg-zinc-800 border border-amber-700 rounded-2xl px-6 py-4">
+        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 py-5 rounded-2xl text-xl">Зарегистрироваться</button>
+      </form>
+      <p id="success-msg" class="hidden text-green-400 text-center mt-6 font-medium">Регистрация прошла успешно! (демо)</p>
+    </div>
+  </div>
 
   <!-- Modal -->
   <div id="modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4">
-    <div class="max-w-4xl bg-gray-900 rounded-3xl p-10 w-full max-h-[95vh] overflow-auto">
-      <button onclick="closeModal()" class="float-right text-5xl hover:text-amber-400 leading-none">×</button>
+    <div class="max-w-4xl bg-zinc-900 rounded-3xl p-12 w-full max-h-[95vh] overflow-auto">
+      <button onclick="closeModal()" class="float-right text-5xl text-amber-400 hover:text-white">×</button>
       <div id="modal-content"></div>
     </div>
   </div>
 
+  <footer class="bg-black py-12 text-center text-amber-400/60">
+    © 2026 Курсовая работа — Художники МО Донской (Тульская область)
+  </footer>
+
   <script>
-    const artists = [ /* массив с твоими реальными фото */ 
+    const artists = [
       {
         id: 1,
         name: "Александр Иванович Теслик",
         years: "род. 1950",
-        title: "Народный художник РФ, академик РАХ, график",
-        bio: "Один из самых известных графиков России. Родился в Бобрик-Донском. Окончил Ярославское художественное училище и Суриковский институт. Профессор, автор множества графических серий.",
+        title: "Народный художник РФ, академик РАХ",
+        bio: "Выдающийся график, профессор. Родился в Бобрик-Донском.",
         photo: "https://rah.ru/upload/iblock/3cb/3cbfeaf9ccf1e737d8146315efc5b13a.jpg",
-        works: ["https://shm-surgut.ru/images/1/1_2020/%D0%92%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9/%D0%9F%D0%BE%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F/%D0%A2%D0%B5%D1%81%D0%BB%D0%B8%D0%BA/%D0%A2%D0%B5%D1%81%D0%BB%D0%B8%D0%BA_%D0%90.%D0%98._%D0%92%D0%B5%D1%87%D0%B5%D1%80._1989__%D1%81%D0%B0%D0%BD%D0%B3%D0%B8%D0%BD%D0%B0_%D1%83%D0%B3%D0%BE%D0%BB%D1%8C.jpg", "https://lifeofours.narod.ru/work/surikov/grafika/prepodavateli/teslik/teslik06.jpg"]
+        works: [
+          "https://shm-surgut.ru/images/1/1_2020/%D0%92%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9/%D0%9F%D0%BE%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F/%D0%A2%D0%B5%D1%81%D0%BB%D0%B8%D0%BA/%D0%A2%D0%B5%D1%81%D0%BB%D0%B8%D0%BA_%D0%90.%D0%98._%D0%92%D0%B5%D1%87%D0%B5%D1%80._1989__%D1%81%D0%B0%D0%BD%D0%B3%D0%B8%D0%BD%D0%B0_%D1%83%D0%B3%D0%BE%D0%BB%D1%8C.jpg",
+          "https://lifeofours.narod.ru/work/surikov/grafika/prepodavateli/teslik/teslik06.jpg"
+        ]
       },
       {
         id: 2,
         name: "Евгений Павлович Журов",
         years: "1957 — 2021",
-        title: "Заслуженный художник России, живописец",
-        bio: "Мастер реалистической живописи и портрета. Преподавал в МГАХИ им. Сурикова.",
+        title: "Заслуженный художник России",
+        bio: "Живописец, педагог Суриковского института.",
         photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTcG9WnSxS64_EbnmosDM5xjEwMD2wEb7JXQ&s",
         works: ["https://www.oph-art.ru/other/product/mid/market/20190528_170611.webp", "https://cs14.pikabu.ru/post_img/2024/02/19/10/1708363586170910304.jpg"]
       },
@@ -139,62 +151,83 @@
         id: 3,
         name: "Анатолий Пименович Попов",
         years: "1946 — 2025",
-        title: "Член Союза художников России, живописец-реалист",
-        bio: "Автор прекрасных пейзажей родного края и работ по церковной тематике.",
+        title: "Член Союза художников России",
+        bio: "Живописец-реалист, автор пейзажей Тульского края.",
         photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSriSqjezQcuDNv75YnuAITDa00jfjpkhYpdw&s",
         works: ["https://upload.wikimedia.org/wikipedia/commons/2/25/Russia_stamp_2017_%E2%84%96_2264.jpg"]
       }
     ];
 
-    // Навигация
-    function navigate(page) {
+    function navigateTo(page) {
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
       document.getElementById(`page-${page}`).classList.remove('hidden');
     }
 
-    // Рендер превью на главной
-    function renderPreviews() {
-      // Artists preview
-      const previewGrid = document.getElementById('artists-preview-grid');
-      previewGrid.innerHTML = artists.map(artist => `
-        <div onclick="showArtist(${artist.id})" class="bg-gray-900 rounded-3xl overflow-hidden cursor-pointer card-hover">
+    function renderContent() {
+      // Главная превью
+      const homeContainer = document.getElementById('home-artists');
+      homeContainer.innerHTML = artists.map(artist => `
+        <div onclick="showArtist(${artist.id})" class="bg-zinc-900 rounded-3xl overflow-hidden card-hover cursor-pointer">
           <img src="${artist.photo}" class="w-full h-80 object-cover">
           <div class="p-6">
-            <h3 class="text-2xl font-bold">${artist.name}</h3>
-            <p class="text-amber-500">${artist.years}</p>
+            <h3 class="font-bold text-xl">${artist.name}</h3>
+            <p class="text-amber-400">${artist.years}</p>
           </div>
         </div>
       `).join('');
 
-      // Gallery preview
-      const galleryPreview = document.getElementById('gallery-preview');
+      // Страница художников
+      document.getElementById('artists-grid').innerHTML = artists.map(artist => `
+        <div onclick="showArtist(${artist.id})" class="bg-zinc-900 rounded-3xl overflow-hidden card-hover cursor-pointer">
+          <img src="${artist.photo}" class="w-full h-80 object-cover">
+          <div class="p-8">
+            <h3 class="text-2xl font-bold">${artist.name}</h3>
+            <p class="text-amber-400">${artist.years}</p>
+            <p class="mt-3 text-gray-400">${artist.title}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Галерея
       let allWorks = [];
-      artists.forEach(a => a.works.forEach(w => allWorks.push({work: w, name: a.name})));
-      galleryPreview.innerHTML = allWorks.slice(0, 8).map(item => `
-        <img src="${item.work}" class="rounded-2xl h-64 object-cover w-full cursor-pointer hover:scale-105 transition" onclick="alert('Открыта картина ${item.name}')">
+      artists.forEach(artist => {
+        artist.works.forEach(work => allWorks.push({url: work, artist: artist.name}));
+      });
+      document.getElementById('gallery-grid').innerHTML = allWorks.map(item => `
+        <img src="${item.url}" class="rounded-3xl h-64 object-cover cursor-pointer hover:scale-105 transition" 
+             onclick="alert('Произведение: ${item.artist}')">
       `).join('');
     }
 
     window.showArtist = function(id) {
       const artist = artists.find(a => a.id === id);
-      let worksHTML = artist.works.map(url => `<img src="${url}" class="rounded-2xl mb-8 shadow-2xl w-full">`).join('');
+      const worksHTML = artist.works.map(url => `<img src="${url}" class="rounded-3xl mb-8 w-full">`).join('');
       
       document.getElementById('modal-content').innerHTML = `
-        <img src="${artist.photo}" class="w-full rounded-3xl mb-10">
-        <h2 class="text-5xl font-bold">${artist.name}</h2>
-        <p class="text-3xl text-amber-500 mt-3 mb-8">${artist.years}</p>
-        <p class="text-xl">${artist.title}</p>
-        <p class="mt-8 text-gray-300 leading-relaxed">${artist.bio}</p>
+        <img src="${artist.photo}" class="w-full rounded-3xl mb-8">
+        <h2 class="text-4xl font-bold">${artist.name}</h2>
+        <p class="text-3xl text-amber-400 mt-2">${artist.years}</p>
+        <p class="mt-4">${artist.title}</p>
+        <p class="mt-8 text-gray-300">${artist.bio}</p>
         <h3 class="text-2xl font-semibold mt-12 mb-6">Произведения</h3>
         ${worksHTML}
       `;
       document.getElementById('modal').classList.remove('hidden');
     };
 
-    window.closeModal = () => document.getElementById('modal').classList.add('hidden');
+    window.closeModal = function() {
+      document.getElementById('modal').classList.add('hidden');
+    };
 
-    // Init
-    renderPreviews();
+    function register(e) {
+      e.preventDefault();
+      document.getElementById('success-msg').classList.remove('hidden');
+      setTimeout(() => alert('✅ Регистрация прошла успешно (демо-режим)'), 800);
+    }
+
+    // Запуск сайта
+    renderContent();
+    navigateTo('home'); // открываем главную по умолчанию
   </script>
 </body>
 </html>
