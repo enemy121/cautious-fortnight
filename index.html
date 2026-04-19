@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Художники Донского | Тульская область</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; }
+    .hero-bg { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070'); background-size: cover; }
+    .nav-active { color: rgb(245 158 11); border-bottom: 3px solid rgb(245 158 11); }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-200">
+
+  <!-- Header -->
+  <header class="bg-black border-b border-amber-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-palette text-4xl text-amber-500"></i>
+        <h1 class="text-3xl font-bold">Художники Донского</h1>
+      </div>
+      <nav class="flex gap-8 text-lg">
+        <a href="#" onclick="navigate('home')" class="nav-link nav-active hover:text-amber-400">Главная</a>
+        <a href="#" onclick="navigate('artists')" class="nav-link hover:text-amber-400">Художники</a>
+        <a href="#" onclick="navigate('gallery')" class="nav-link hover:text-amber-400">Галерея</a>
+        <a href="#" onclick="navigate('history')" class="nav-link hover:text-amber-400">История</a>
+        <a href="#" onclick="navigate('donskoy')" class="nav-link hover:text-amber-400">Донской</a>
+        <a href="#" onclick="navigate('register')" class="nav-link hover:text-amber-400">Регистрация</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <div id="page-home" class="page">
+    <section class="hero-bg h-screen flex items-center">
+      <div class="max-w-5xl mx-auto text-center px-6">
+        <h2 class="text-6xl font-bold mb-6">Известные художники<br>города Донской</h2>
+        <p class="text-2xl text-amber-300 mb-8">Тульская область • Посвящено выдающимся землякам</p>
+        <button onclick="navigate('artists')" class="bg-amber-600 hover:bg-amber-500 px-10 py-5 rounded-2xl text-xl">Перейти к художникам</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ARTISTS -->
+  <div id="page-artists" class="page hidden">
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold text-center mb-10">Художники Донского</h2>
+      <div class="flex gap-4 mb-10">
+        <input id="search" placeholder="Поиск художника..." class="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-6 py-4 focus:border-amber-500 outline-none">
+        <select id="filter" class="bg-gray-900 border border-gray-700 rounded-xl px-6 py-4">
+          <option value="">Все</option>
+          <option value="графика">Графика</option>
+          <option value="живопись">Живопись</option>
+        </select>
+      </div>
+      <div id="artists-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </section>
+  </div>
+
+  <!-- GALLERY -->
+  <div id="page-gallery" class="page hidden">
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold text-center mb-12">Галерея произведений</h2>
+      <div id="art-gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="page-history" class="page hidden max-w-4xl mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold text-center mb-12">История искусства Донского</h2>
+    <div class="prose prose-lg text-gray-300">
+      <p>Город Донской богат художественными традициями. В XX–XXI веках здесь родились талантливые мастера, которые внесли значительный вклад в российское реалистическое искусство.</p>
+      <p>Их работы отражают любовь к родному краю, промышленную мощь региона и духовную жизнь Тульской области.</p>
+    </div>
+  </div>
+
+  <!-- DONSKOY -->
+  <div id="page-donskoy" class="page hidden">
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold text-center mb-12">Город Донской</h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <img src="https://via.placeholder.com/800x500/1f2937/ffffff?text=Усадьба+Бобрики" class="rounded-2xl mb-6 w-full">
+          <img src="https://via.placeholder.com/800x500/1f2937/ffffff?text=Храм+Преображения" class="rounded-2xl w-full">
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold mb-6">Достопримечательности</h3>
+          <ul class="space-y-4 text-gray-300">
+            <li>• Историко-мемориальный комплекс «Бобрики»</li>
+            <li>• Храм Преображения Господня</li>
+            <li>• Музей Подмосковного угольного бассейна</li>
+            <li>• Парк усадьбы Бобринских</li>
+          </ul>
+          <div class="mt-10">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2344.5!2d38.078!3d53.966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4132a5f5f5f5f5f5%3A0x1234567890abcdef!2z0JTQvtC70L3Ri9C5INCS0LDRgNC60LAg0L7Qv9C10YDQvtC60L3Qvg" width="100%" height="400" style="border:0; border-radius:16px;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- REGISTRATION -->
+  <div id="page-register" class="page hidden max-w-md mx-auto px-6 py-20">
+    <div class="bg-gray-900 rounded-3xl p-10">
+      <h2 class="text-4xl font-bold text-center mb-8">Регистрация</h2>
+      <form id="reg-form" onsubmit="register(event)">
+        <input type="text" id="name" placeholder="ФИО" required class="w-full mb-5 bg-gray-800 border border-gray-700 rounded-xl px-6 py-4">
+        <input type="email" id="email" placeholder="Email" required class="w-full mb-5 bg-gray-800 border border-gray-700 rounded-xl px-6 py-4">
+        <input type="password" id="pass" placeholder="Пароль" required class="w-full mb-8 bg-gray-800 border border-gray-700 rounded-xl px-6 py-4">
+        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 py-5 rounded-2xl text-xl font-medium">Зарегистрироваться</button>
+      </form>
+      <p id="reg-success" class="hidden text-green-400 text-center mt-6">Регистрация успешна! (демо)</p>
+    </div>
+  </div>
+
+  <!-- Modal for Artist -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4">
+    <div class="max-w-4xl bg-gray-900 rounded-3xl p-10 w-full max-h-[95vh] overflow-auto">
+      <button onclick="closeModal()" class="float-right text-4xl hover:text-amber-400">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <footer class="bg-black py-10 text-center text-gray-500">
+    <p>© 2026 Курсовая работа — Художники муниципального образования Донской (Тульская область)</p>
+  </footer>
+
+  <script>
+    const artists = [ /* тот же массив, что раньше, но с лучшими фото и работами */ 
+      {
+        id: 1,
+        name: "Александр Иванович Теслик",
+        years: "род. 1950",
+        title: "Народный художник РФ, академик РАХ",
+        bio: "Выдающийся график, профессор. Родился в Донском. Автор серий «Металлурги Тулы», «Северная деревня», «Греция православная».",
+        type: "графика",
+        photo: "https://rus.team/images/person/teslik-aleksandr-ivanovich/teslik-aleksandr-ivanovich.jpg",
+        works: [
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Осенний+вечер+(Теслик+2009)",
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Металлурги+Тулы",
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Портрет+времени"
+        ]
+      },
+      {
+        id: 2,
+        name: "Евгений Павлович Журов",
+        years: "1957 — 2021",
+        title: "Заслуженный художник России",
+        bio: "Живописец, педагог Суриковского института. Мастер реалистической живописи и портрета.",
+        type: "живопись",
+        photo: "https://via.placeholder.com/600x800/1f2937/fff?text=Е.П.+Журов",
+        works: [
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Осень+(Журов)",
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Поленово",
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Портрет+иеромонаха"
+        ]
+      },
+      {
+        id: 3,
+        name: "Анатолий Пименович Попов",
+        years: "1946 — 2025",
+        title: "Член Союза художников России",
+        bio: "Живописец-реалист. Автор пейзажей Тульского края и храмовых работ.",
+        type: "живопись",
+        photo: "https://via.placeholder.com/600x800/1f2937/fff?text=А.П.+Попов",
+        works: [
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Пейзаж+Донского",
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Родные+просторы",
+          "https://via.placeholder.com/800x600/1f2937/fff?text=Храмовая+живопись"
+        ]
+      }
+    ];
+
+    // Навигация между "страницами"
+    function navigate(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById(`page-${page}`).classList.remove('hidden');
+      
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('nav-active'));
+      event.currentTarget.classList.add('nav-active');
+    }
+
+    // Рендер художников и остальные функции (как в предыдущей версии)
+    function renderArtists(filtered) {
+      const grid = document.getElementById('artists-grid');
+      grid.innerHTML = '';
+      filtered.forEach(artist => {
+        const card = document.createElement('div');
+        card.className = 'bg-gray-900 rounded-2xl overflow-hidden cursor-pointer hover:scale-105 transition';
+        card.innerHTML = `
+          <img src="${artist.photo}" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold">${artist.name}</h3>
+            <p class="text-amber-500">${artist.years}</p>
+            <p class="mt-3 text-gray-400">${artist.title}</p>
+            <button onclick="showArtist(${artist.id}); event.stopImmediatePropagation()" class="mt-6 text-amber-400">Подробнее →</button>
+          </div>
+        `;
+        card.onclick = () => showArtist(artist.id);
+        grid.appendChild(card);
+      });
+    }
+
+    window.showArtist = function(id) {
+      const artist = artists.find(a => a.id === id);
+      let worksHTML = artist.works.map(url => `<img src="${url}" class="rounded-2xl mb-8 shadow-2xl">`).join('');
+      
+      document.getElementById('modal-content').innerHTML = `
+        <img src="${artist.photo}" class="w-full rounded-2xl mb-8">
+        <h2 class="text-4xl font-bold">${artist.name}</h2>
+        <p class="text-3xl text-amber-500 my-4">${artist.years}</p>
+        <p class="text-xl">${artist.title}</p>
+        <p class="my-8 text-gray-300">${artist.bio}</p>
+        <h3 class="text-2xl font-semibold mb-6">Произведения</h3>
+        ${worksHTML}
+      `;
+      document.getElementById('modal').classList.remove('hidden');
+    };
+
+    window.closeModal = function() { document.getElementById('modal').classList.add('hidden'); };
+
+    function register(e) {
+      e.preventDefault();
+      document.getElementById('reg-success').classList.remove('hidden');
+      setTimeout(() => alert('Регистрация прошла успешно! (демо-режим для курсовой)'), 500);
+    }
+
+    // Инициализация
+    renderArtists(artists);
+    document.getElementById('search').addEventListener('input', () => {
+      const term = document.getElementById('search').value.toLowerCase();
+      const filtered = artists.filter(a => a.name.toLowerCase().includes(term));
+      renderArtists(filtered);
+    });
+  </script>
+</body>
+</html>
